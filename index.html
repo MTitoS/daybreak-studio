@@ -96,10 +96,9 @@ header.scrolled{background:rgba(250,247,240,.86);backdrop-filter:blur(14px);box-
   z-index:0;pointer-events:none;
 }
 .hero::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:210px;
-  background:linear-gradient(180deg,transparent 0%,rgba(233,168,91,.22) 40%,rgba(62,96,120,.55) 100%);
-  z-index:0;pointer-events:none;
-}
+  content:"";position:absolute;left:0;right:0;bottom:0;height:840px;
+  background:linear-gradient(180deg,transparent 0%,rgba(233,168,91,.22) 12%,rgba(62,96,120,.55) 100%);
+  z-index:0;pointer-events:none}
 .hero-sun{
   position:absolute;left:50%;top:74px;transform:translateX(-50%);
   width:clamp(240px,30vw,360px);height:auto;z-index:0;pointer-events:none;
@@ -117,17 +116,17 @@ header.scrolled{background:rgba(250,247,240,.86);backdrop-filter:blur(14px);box-
   animation:sunTrail 1.4s linear both;
 }
 @keyframes sunRise{
-  0%{transform:translate(calc(-50% - 300px),220px) scale(.88);opacity:0}
-  10%{transform:translate(calc(-50% - 254px),217px) scale(.90);opacity:.71}
-  20%{transform:translate(calc(-50% - 207px),209px) scale(.92);opacity:1}
-  30%{transform:translate(calc(-50% - 164px),196px) scale(.94);opacity:1}
-  40%{transform:translate(calc(-50% - 124px),178px) scale(.96);opacity:1}
-  50%{transform:translate(calc(-50% - 88px),156px) scale(.97);opacity:1}
-  60%{transform:translate(calc(-50% - 57px),129px) scale(.98);opacity:1}
-  70%{transform:translate(calc(-50% - 33px),100px) scale(.99);opacity:1}
-  80%{transform:translate(calc(-50% - 15px),68px) scale(.995);opacity:1}
-  90%{transform:translate(calc(-50% - 4px),34px) scale(.999);opacity:1}
-  100%{transform:translate(-50%,0) scale(1);opacity:1}
+  0%{transform:translate(calc(-50% - 300px),220px) scale(.45);opacity:0}
+  10%{transform:translate(calc(-50% - 254px),217px) scale(.465);opacity:.71}
+  20%{transform:translate(calc(-50% - 207px),209px) scale(.48);opacity:1}
+  30%{transform:translate(calc(-50% - 164px),196px) scale(.51);opacity:1}
+  40%{transform:translate(calc(-50% - 124px),178px) scale(.555);opacity:1}
+  50%{transform:translate(calc(-50% - 88px),156px) scale(.61);opacity:1}
+  60%{transform:translate(calc(-50% - 57px),129px) scale(.675);opacity:1}
+  70%{transform:translate(calc(-50% - 33px),100px) scale(.745);opacity:1}
+  80%{transform:translate(calc(-50% - 15px),68px) scale(.815);opacity:1}
+  90%{transform:translate(calc(-50% - 4px),34px) scale(.88);opacity:1}
+  100%{transform:translate(-50%,0) scale(.92);opacity:1}
 }
 @keyframes sunTrail{
   0%{opacity:0;transform:translate(-50%,-50%) rotate(8deg) scale(.7)}
@@ -356,24 +355,24 @@ footer::before{
   .steps{grid-template-columns:1fr}
   .hero-meta{gap:26px 36px}
 }
-/* ---------- Industry Demos ---------- */
-.demos{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(242,201,155,.07),rgba(242,201,155,0) 24%)}
-.demos h2 em{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:600;color:var(--gold)}
-.demo-tabs{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-bottom:42px}
-.demo-tab-btn{background:var(--surface);border:1px solid var(--line);color:var(--ink-soft);padding:.6rem 1.25rem;border-radius:999px;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s var(--ease)}
-.demo-tab-btn:hover{transform:translateY(-2px);border-color:var(--ink-soft)}
-.demo-tab-btn.active{background:var(--gold);color:#3a2a12;border-color:var(--gold);box-shadow:0 12px 26px -14px rgba(233,168,91,.65)}
-.demo-card{background:#f4f1ea;border:1px solid var(--line);border-radius:var(--radius);padding:38px 34px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
-.demo-info h3{font-size:1.7rem;font-weight:600;margin-bottom:14px;color:var(--ink)}
-.demo-info p{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:20px}
-.demo-features{display:flex;flex-direction:column;gap:.7rem;margin-bottom:24px}
-.demo-feat{display:flex;align-items:flex-start;gap:.7rem;font-size:.93rem;color:var(--ink-soft)}
-.demo-feat-check{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(233,168,91,.16);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;margin-top:1px}
-.demo-visual{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:30px;text-align:center;position:relative}
-.demo-badge{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--dawn);font-weight:600;display:block;margin-bottom:14px}
-.demo-mock{font-size:3.6rem;margin-bottom:12px;line-height:1}
-.demo-visual p{color:var(--muted);font-size:.9rem;line-height:1.6}
-@media(max-width:760px){.demo-card{grid-template-columns:1fr;gap:24px}}
+
+/* ---------- Pricing ---------- */
+.pricing{position:relative}
+.pricing .sec-head{margin-bottom:46px}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.price-card{position:relative;background:#f4f1ea;border:1px solid var(--line);border-radius:var(--radius);padding:36px 32px;display:flex;flex-direction:column;gap:22px;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
+.price-card.featured{border-color:var(--gold);box-shadow:0 26px 60px -34px rgba(233,168,91,.7);background:linear-gradient(180deg,#fbf3e4,#f4f1ea)}
+.price-badge{position:absolute;top:-13px;left:32px;background:var(--gold);color:#3a2a12;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.4rem .9rem;border-radius:999px}
+.price-head h3{font-size:1.4rem;font-weight:600;color:var(--ink);margin-bottom:10px}
+.price-head p{color:var(--muted);font-size:.95rem;line-height:1.6;margin-bottom:18px}
+.price-amt{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;color:var(--ink)}
+.price-amt span{display:block;font-family:'Inter',system-ui,sans-serif;font-size:.82rem;font-weight:500;color:var(--muted);margin-top:4px;letter-spacing:0}
+.price-sub{margin-top:12px;color:var(--dawn);font-weight:600;font-size:.9rem}
+.price-feats{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin:0;padding:0}
+.price-feats li{display:flex;align-items:flex-start;gap:.7rem;font-size:.94rem;color:var(--ink-soft);line-height:1.5}
+.ck{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(233,168,91,.16);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;margin-top:1px}
+.price-card .btn{margin-top:auto}
+@media(max-width:760px){.pricing-grid{grid-template-columns:1fr;gap:30px}}
 
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto}
@@ -403,6 +402,7 @@ footer::before{
       <a href="#services">Services</a>
       <a href="#approach">Approach</a>
       <a href="#work">Work</a>
+      <a href="#pricing">Pricing</a>
       <a href="#studio">Studio</a>
       <a href="#contact" class="btn btn-accent">Start a project</a>
     </nav>
@@ -565,40 +565,49 @@ footer::before{
 
 <hr class="divider" aria-hidden="true">
 
-<!-- INDUSTRY DEMOS -->
-<section class="demos reveal" id="demos">
+<!-- PRICING -->
+<section class="pricing reveal" id="pricing">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Interactive Industry Demos</span>
-      <h2>Custom concepts for <em>your niche.</em></h2>
-      <p class="lead">Select your industry below to see how we tailor every design for maximum local conversion.</p>
+      <span class="eyebrow">Flexible Investment</span>
+      <h2>Pricing tailored to <em>your project scope.</em></h2>
+      <p class="lead">No rigid packages or hidden agency fees. Every quote is custom-fitted to the exact features and scale your business requires.</p>
     </div>
 
-    <div class="demo-tabs">
-      <button class="demo-tab-btn active" data-niche="detailing">🚗 Auto Detailing</button>
-      <button class="demo-tab-btn" data-niche="barber">💈 Barber &amp; Salon</button>
-      <button class="demo-tab-btn" data-niche="dental">🦷 Dental &amp; Medical</button>
-      <button class="demo-tab-btn" data-niche="hvac">🛠️ HVAC &amp; Plumbing</button>
-      <button class="demo-tab-btn" data-niche="restaurant">🍷 Restaurant &amp; Bar</button>
-    </div>
-
-    <div class="demo-card">
-      <div class="demo-info">
-        <h3 id="demoTitle">Auto Detailing &amp; Ceramic Coating Studio</h3>
-        <p id="demoDesc">Designed for premium local detailing shops. Features instant service packages, online booking request, before &amp; after transformation gallery, and customer review highlights.</p>
-        <div class="demo-features" id="demoFeats">
-          <div class="demo-feat"><span class="demo-feat-check">✓</span><span>Interactive Service Calculator (Ceramic, Paint Correction, Full Detail)</span></div>
-          <div class="demo-feat"><span class="demo-feat-check">✓</span><span>One-Tap Call &amp; Text Buttons for Instant Quote Requests</span></div>
-          <div class="demo-feat"><span class="demo-feat-check">✓</span><span>Google Reviews Auto-Sync &amp; Star Rating Display</span></div>
-          <div class="demo-feat"><span class="demo-feat-check">✓</span><span>Mobile-First Booking Form with Vehicle Type Selection</span></div>
+    <div class="pricing-grid">
+      <article class="price-card">
+        <div class="price-head">
+          <h3>Essential Lead Builder</h3>
+          <p>Designed for businesses needing a fast, high-converting presence to drive immediate local inquiries.</p>
+          <div class="price-amt">Custom <span>/ Based on Scope</span></div>
+          <div class="price-sub">✓ Fast 5–7 Days Turnaround</div>
         </div>
-        <a href="#contact" class="btn btn-accent">Request Free Concept for My Business</a>
-      </div>
-      <div class="demo-visual">
-        <span class="demo-badge" id="demoBadge">High-Ticket Service Focus</span>
-        <div class="demo-mock" id="demoMock">🚗</div>
-        <p>Customized layout with fast load speeds, modern aesthetics, and optimized call-to-actions.</p>
-      </div>
+        <ul class="price-feats">
+          <li><span class="ck">✓</span><span>High-Converting Single Page / Landing Page</span></li>
+          <li><span class="ck">✓</span><span>Mobile-Optimized &amp; Lightning Fast Loading</span></li>
+          <li><span class="ck">✓</span><span>Instant Call / Text / Quote Form</span></li>
+          <li><span class="ck">✓</span><span>Google Maps &amp; Local Contact Integration</span></li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="width:100%;justify-content:center">Get Custom Quote</a>
+      </article>
+
+      <article class="price-card featured">
+        <span class="price-badge">Full Custom Build</span>
+        <div class="price-head">
+          <h3>Complete Business Showcase</h3>
+          <p>Comprehensive web design engineered to establish authority and dominate your local competition.</p>
+          <div class="price-amt">Tailored <span>/ Based on Features</span></div>
+          <div class="price-sub">✓ 7–10 Days Turnaround</div>
+        </div>
+        <ul class="price-feats">
+          <li><span class="ck">✓</span><span>Multi-Page Custom Business Architecture</span></li>
+          <li><span class="ck">✓</span><span>Detailed Services Showcase &amp; Interactive Pricing</span></li>
+          <li><span class="ck">✓</span><span>Google Reviews Auto-Sync &amp; Work Gallery</span></li>
+          <li><span class="ck">✓</span><span>Direct WhatsApp &amp; Email Lead Capture</span></li>
+          <li><span class="ck">✓</span><span>Custom SEO Structure &amp; Local Meta Setup</span></li>
+        </ul>
+        <a href="#contact" class="btn btn-accent" style="width:100%;justify-content:center">Request Tailored Proposal</a>
+      </article>
     </div>
   </div>
 </section>
@@ -630,14 +639,15 @@ footer::before{
   <div class="wrap contact-grid">
     <div class="reveal">
       <span class="eyebrow">Let's begin</span>
-      <h2>Got an idea waiting for daylight?</h2>
+      <h2>Got an idea waiting for <span class="light">daylight</span>?</h2>
       <p class="lead">Tell us what you're building. We'll reply with a frank read on fit and next steps — usually within a day.</p>
       <div class="ways">
-        <a href="mailto:hello@daybreak.studio"><span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>hello@daybreak.studio</a>
+        <a href="mailto:daybreakstdio@gmail.com"><span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>daybreakstdio@gmail.com</a>
         <span class="way"><span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Mon–Fri, from first light</span>
       </div>
     </div>
-    <form class="reveal" id="contactForm" novalidate>
+    <form class="reveal" id="contactForm" action="https://formspree.io/f/mzepyaqv" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="New project brief — Daybreak Studio">
       <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required></div>
       <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@company.com" required></div>
       <div class="field"><label for="msg">Project</label><textarea id="msg" name="msg" placeholder="What are you building?" required></textarea></div>
@@ -687,38 +697,31 @@ footer::before{
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 
-  /* form */
+  /* form -> Formspree (vanilla fetch, no libs) */
   var form=document.getElementById('contactForm'),ok=document.getElementById('formOk');
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var name=form.name.value.trim(),email=form.email.value.trim(),msg=form.msg.value.trim();
     var valid=name&&msg&&/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-    if(!valid){ok.style.display='none';form.querySelectorAll('input,textarea').forEach(function(f){f.style.borderColor=valid?'':'#E9A85B'});return;}
-    ok.style.display='block';form.reset();
-  });
-
-  /* industry demos tabs */
-  var NICHES={
-    detailing:{title:"Auto Detailing & Ceramic Coating Studio",desc:"Designed for premium local detailing shops. Features instant service packages, online booking request, before & after transformation gallery, and customer review highlights.",icon:"🚗",badge:"High-Ticket Service Focus",features:["Interactive Service Calculator (Ceramic, Paint Correction, Full Detail)","One-Tap Call & Text Buttons for Instant Quote Requests","Google Reviews Auto-Sync & Star Rating Display","Mobile-First Booking Form with Vehicle Type Selection"]},
-    barber:{title:"Vintage & Modern Barber Club",desc:"Crafted for barbershops looking to showcase their atmosphere, haircuts, and barber team while allowing clients to easily schedule an appointment via WhatsApp or online booking.",icon:"💈",badge:"Atmosphere & Booking Focus",features:["Services Menu with Prices & Duration Estimates","Barber Team Profiles & Chair Availability","Direct WhatsApp / Call Booking Integration","Photo Gallery for Cut Styles & Shop Ambience"]},
-    dental:{title:"Family Dental & Cosmetic Dentistry Clinic",desc:"Trust-building, clean design for dental practices and medical clinics. Emphasizes patient comfort, financing options, emergency care contacts, and online appointment booking.",icon:"🦷",badge:"Trust & Lead Gen Focus",features:["New Patient Special Offer Hero Banner","Insurance & Payment Plan Transparency","Patient Testimonials & Smile Transformations","HIPAA-Compliant Contact & Consultation Request"]},
-    hvac:{title:"HVAC, Plumbing & Home Services",desc:"Built for local contractors who need emergency calls 24/7. High contrast, mobile-optimized phone buttons, clear service areas, and fast quote requests.",icon:"🛠️",badge:"Emergency Call & Quote Focus",features:["24/7 Emergency Service Floating Call Bar","Zip-Code Service Area Verification","Upfront Estimate Request Form","Licensed & Insured Proof Badges"]},
-    restaurant:{title:"Boutique Restaurant & Craft Bar",desc:"Visually stunning website for local eateries, coffee shops, and bars. Includes digital interactive menu, online table reservation, and OpenTable/DoorDash links.",icon:"🍷",badge:"Menu & Reservation Focus",features:["Mobile Digital Menu with Category Filters","Table Reservation Request","Hours & Location Map Integration","Special Events & Weekly Specials Section"]}
-  };
-  var demoBtns=document.querySelectorAll('.demo-tab-btn');
-  var dTitle=document.getElementById('demoTitle'),dDesc=document.getElementById('demoDesc'),
-      dBadge=document.getElementById('demoBadge'),dMock=document.getElementById('demoMock'),dFeats=document.getElementById('demoFeats');
-  demoBtns.forEach(function(b){
-    b.addEventListener('click',function(){
-      var n=b.dataset.niche,o=NICHES[n];
-      if(!o)return;
-      demoBtns.forEach(function(c){c.classList.remove('active')});
-      b.classList.add('active');
-      if(dTitle)dTitle.textContent=o.title;
-      if(dDesc)dDesc.textContent=o.desc;
-      if(dBadge)dBadge.textContent=o.badge;
-      if(dMock)dMock.textContent=o.icon;
-      if(dFeats)dFeats.innerHTML=o.features.map(function(f){return '<div class="demo-feat"><span class="demo-feat-check">✓</span><span>'+f+'</span></div>'}).join('');
+    if(!valid){
+      ok.style.display='none';
+      form.querySelectorAll('input,textarea').forEach(function(f){f.style.borderColor='#E9A85B'});
+      return;
+    }
+    var btn=form.querySelector('button[type=submit]');
+    btn.disabled=true;btn.textContent='Sending…';
+    fetch(form.action,{
+      method:'POST',
+      body:new FormData(form),
+      headers:{'Accept':'application/json'}
+    }).then(function(r){
+      if(r.ok){ok.style.display='block';form.reset();}
+      else{return r.json().then(function(d){throw new Error(d.error||'Error')});}
+    }).catch(function(){
+      ok.style.display='block';
+      ok.textContent='Thanks — but something glitched. Email us at daybreakstdio@gmail.com. ☀';
+    }).finally(function(){
+      btn.disabled=false;btn.textContent='Send the brief →';
     });
   });
 
