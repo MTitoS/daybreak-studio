@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daybreak Studio — Making your ideas come to light</title>
+<meta name="description" content="Daybreak Studio is a web studio crafting design and code for brands ready to begin. We turn early ideas into interfaces that ship.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Playfair+Display:ital,wght@1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#17263A;   /* Night Horizon  */
+  --night-deep:#0E1A2A; /* Deepest night (footer) */
+  --dawn:#3E6078;    /* Dawn Blue      */
+  --mist:#A9C1C8;    /* Morning Mist   */
+  --sun:#F2C99B;     /* Soft Sunrise   */
+  --gold:#E9A85B;    /* Golden Hour    */
+  --warm:#F6E4C5;    /* Warm Light     */
+  --day:#FAF7F0;     /* Daybreak       */
+
+  --ink:#17263A;
+  --ink-soft:#3E6078;
+  --muted:#5d7184;
+  --line:rgba(23,38,58,.12);
+  --line-soft:rgba(23,38,58,.07);
+  --bg:#FAF7F0;
+  --surface:#ffffff;
+  --radius:18px;
+  --shadow:0 22px 60px -32px rgba(23,38,58,.45);
+  --maxw:1140px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--ink);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(120% 75% at 50% -8%, rgba(233,168,91,.20), rgba(242,201,155,.06) 38%, transparent 60%),
+    radial-gradient(90% 55% at 88% 108%, rgba(62,96,120,.10), transparent 60%),
+    radial-gradient(70% 45% at 8% 60%, rgba(169,193,200,.12), transparent 60%);
+  background-attachment:fixed;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px;position:relative;z-index:1}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.eyebrow{
+  font-family:'Inter',sans-serif;font-weight:600;font-size:.74rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--dawn);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+section{padding:120px 0}
+.lead{font-size:1.12rem;color:var(--muted);max-width:54ch}
+
+/* ---------- Header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  transition:background .4s var(--ease),box-shadow .4s var(--ease),padding .4s var(--ease);
+  padding:22px 0;
+}
+header.scrolled{background:rgba(250,247,240,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line-soft);padding:14px 0}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:600;font-size:1.22rem;letter-spacing:-.01em}
+.brand .mark{width:30px;height:30px;flex:0 0 auto}
+.brand .mark svg{display:block}
+.nav-links{display:flex;align-items:center;gap:34px}
+.nav-links a{font-size:.93rem;font-weight:500;color:var(--ink-soft);transition:color .25s}
+.nav-links a:hover{color:var(--ink)}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.92rem;
+  padding:12px 22px;border-radius:999px;cursor:pointer;border:1px solid transparent;
+  transition:transform .25s var(--ease),background .25s,color .25s,box-shadow .25s;
+}
+.btn-primary{background:var(--night);color:var(--day);box-shadow:0 12px 26px -14px rgba(23,38,58,.7)}
+.btn-primary:hover{transform:translateY(-2px);background:var(--dawn)}
+.btn-accent{background:var(--gold);color:#3a2a12;box-shadow:0 12px 26px -14px rgba(233,168,91,.65)}
+.btn-accent:hover{transform:translateY(-2px);background:#f0b56a}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink);background:var(--surface)}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--ink);margin:4px 0;transition:.3s}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:172px 0 120px;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;left:50%;top:12%;transform:translateX(-50%);
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(233,168,91,.18),rgba(242,201,155,.08) 46%,transparent 70%);
+  z-index:0;pointer-events:none;
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:210px;
+  background:linear-gradient(180deg,transparent 0%,rgba(233,168,91,.22) 40%,rgba(62,96,120,.55) 100%);
+  z-index:0;pointer-events:none;
+}
+.hero-sun{
+  position:absolute;left:50%;top:74px;transform:translateX(-50%);
+  width:clamp(240px,30vw,360px);height:auto;z-index:0;pointer-events:none;
+  animation:sunRise 1.4s linear both;
+}
+.hero-sun-inner{width:100%;will-change:transform}
+/* light trail that follows the sunrise arc */
+.hero-sun::before{
+  content:"";position:absolute;left:50%;top:50%;width:340px;height:260px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(60% 60% at 22% 78%,rgba(233,168,91,.30),rgba(242,201,155,.12) 38%,transparent 70%);
+  z-index:-1;pointer-events:none;
+  -webkit-mask-image:radial-gradient(closest-side,transparent 58%,#000 60%,transparent 100%);
+          mask-image:radial-gradient(closest-side,transparent 58%,#000 60%,transparent 100%);
+  animation:sunTrail 1.4s linear both;
+}
+@keyframes sunRise{
+  0%{transform:translate(calc(-50% - 300px),220px) scale(.88);opacity:0}
+  10%{transform:translate(calc(-50% - 254px),217px) scale(.90);opacity:.71}
+  20%{transform:translate(calc(-50% - 207px),209px) scale(.92);opacity:1}
+  30%{transform:translate(calc(-50% - 164px),196px) scale(.94);opacity:1}
+  40%{transform:translate(calc(-50% - 124px),178px) scale(.96);opacity:1}
+  50%{transform:translate(calc(-50% - 88px),156px) scale(.97);opacity:1}
+  60%{transform:translate(calc(-50% - 57px),129px) scale(.98);opacity:1}
+  70%{transform:translate(calc(-50% - 33px),100px) scale(.99);opacity:1}
+  80%{transform:translate(calc(-50% - 15px),68px) scale(.995);opacity:1}
+  90%{transform:translate(calc(-50% - 4px),34px) scale(.999);opacity:1}
+  100%{transform:translate(-50%,0) scale(1);opacity:1}
+}
+@keyframes sunTrail{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(8deg) scale(.7)}
+  20%{opacity:1}
+  80%{opacity:.8}
+  100%{opacity:.5;transform:translate(-50%,-50%) rotate(0deg) scale(1)}
+}
+.hero-glow{
+  position:absolute;left:50%;top:5%;transform:translateX(-50%);
+  width:min(900px,94vw);height:620px;pointer-events:none;
+  background:radial-gradient(58% 55% at 50% 40%,rgba(233,168,91,.30),rgba(242,201,155,.13) 42%,transparent 70%);
+  filter:blur(10px);z-index:0;
+}
+.hero-inner{position:relative;z-index:1;max-width:880px}
+.hero h1{
+  font-size:clamp(2.7rem,6.4vw,5.1rem);margin:18px 0 26px;
+}
+.light{
+  font-family:'Playfair Display',Georgia,serif;
+  font-style:italic;font-weight:600;color:var(--gold);
+  position:relative;white-space:nowrap;
+}
+.light::after{
+  content:"";position:absolute;left:0;right:0;bottom:.06em;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.55;
+}
+.hero .lead{font-size:1.22rem;max-width:60ch;margin-bottom:34px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{
+  margin-top:64px;display:flex;flex-wrap:wrap;gap:36px 54px;
+  padding-top:30px;border-top:1px solid var(--line);
+}
+.hero-meta .stat .n{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:600;color:var(--ink)}
+.hero-meta .stat .l{font-size:.85rem;color:var(--muted);letter-spacing:.02em}
+.scroll-hint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-hint .dot{width:1px;height:30px;background:linear-gradient(var(--dawn),transparent);animation:drop 2.4s var(--ease) infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- Section heading ---------- */
+.sec-head{max-width:640px;margin-bottom:54px}
+.sec-head h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:16px}
+
+/* ---------- Services ---------- */
+.services{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(242,201,155,.07),rgba(242,201,155,0) 24%)}
+.services::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(rgba(62,96,120,.07) 1px,transparent 1.4px);
+  background-size:28px 28px;
+  -webkit-mask-image:radial-gradient(82% 72% at 50% 28%,#000,transparent 76%);
+          mask-image:radial-gradient(82% 72% at 50% 28%,#000,transparent 76%);
+}
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.svc{
+  --rx:0deg;--ry:0deg;
+  background:#f4f1ea;border:1px solid var(--line);border-radius:var(--radius);
+  padding:34px 32px;transition:transform .2s var(--ease),box-shadow .2s,border-color .2s;
+  transform:perspective(900px) translateY(0) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style:preserve-3d;will-change:transform;
+}
+.svc:hover{transform:perspective(900px) translateY(-4px) rotateX(var(--rx)) rotateY(var(--ry));box-shadow:var(--shadow);border-color:transparent}
+.reveal.in.svc:hover{transform:perspective(900px) translateY(-4px) rotateX(var(--rx)) rotateY(var(--ry));box-shadow:var(--shadow);border-color:transparent}
+.svc .ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(62,96,120,.1);color:var(--dawn);margin-bottom:20px}
+.svc h3{font-size:1.45rem;margin-bottom:8px}
+.svc p{color:var(--muted);font-size:.98rem;margin-bottom:18px}
+.svc ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.svc li{display:flex;align-items:center;gap:11px;font-size:.94rem;color:var(--ink-soft)}
+.svc li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+
+/* ---------- Approach ---------- */
+.approach{position:relative;overflow:hidden}
+.approach::before{
+  content:"";position:absolute;left:50%;top:-16%;transform:translateX(-50%);
+  width:min(740px,94vw);height:min(740px,94vw);z-index:0;pointer-events:none;opacity:1;
+  background:conic-gradient(from 200deg at 50% 50%,
+    transparent 0deg,   rgba(233,168,91,.24) 10deg, transparent 22deg,
+    rgba(242,201,155,.18) 34deg, transparent 46deg, rgba(62,96,120,.15) 58deg, transparent 70deg,
+    rgba(233,168,91,.24) 82deg, transparent 94deg, rgba(242,201,155,.18) 106deg, transparent 118deg,
+    rgba(62,96,120,.15) 130deg, transparent 142deg, rgba(233,168,91,.24) 154deg, transparent 166deg,
+    rgba(242,201,155,.18) 178deg, transparent 190deg, rgba(62,96,120,.15) 202deg, transparent 214deg,
+    rgba(233,168,91,.24) 226deg, transparent 238deg, rgba(242,201,155,.18) 250deg, transparent 262deg,
+    rgba(62,96,120,.15) 274deg, transparent 286deg, rgba(233,168,91,.24) 298deg, transparent 310deg,
+    rgba(242,201,155,.18) 322deg, transparent 334deg, rgba(62,96,120,.15) 346deg, transparent 360deg);
+  -webkit-mask-image:radial-gradient(closest-side,#000,transparent 80%);
+          mask-image:radial-gradient(closest-side,#000,transparent 80%);
+}
+.approach::after{
+  content:"";position:absolute;left:50%;top:6%;transform:translateX(-50%);
+  width:130px;height:130px;border-radius:50%;z-index:0;pointer-events:none;
+  background:radial-gradient(circle,rgba(233,168,91,.30),rgba(242,201,155,.10) 52%,transparent 72%);
+}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s;border-top:1px solid var(--line)}
+.step{padding:38px 26px 0;position:relative;border-right:1px solid var(--line-soft)}
+.step:last-child{border-right:none}
+.step .num{font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;letter-spacing:.04em}
+.step:nth-child(1) .num{color:var(--night)}
+.step:nth-child(2) .num{color:var(--dawn)}
+.step:nth-child(3) .num{color:#c98a3a}
+.step:nth-child(4) .num{color:var(--gold)}
+.step h3{font-size:1.2rem;margin:14px 0 10px}
+.step p{color:var(--muted);font-size:.93rem}
+.step::before{content:"";position:absolute;top:-5px;left:26px;width:9px;height:9px;border-radius:50%;background:var(--dawn);box-shadow:0 0 0 4px var(--bg)}
+.step:nth-child(1)::before{background:var(--night)}
+.step:nth-child(2)::before{background:var(--dawn)}
+.step:nth-child(3)::before{background:#c98a3a}
+.step:nth-child(4)::before{background:var(--gold)}
+
+/* ---------- Work ---------- */
+.work{position:relative;overflow:hidden}
+.work::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(58% 50% at 88% 4%,rgba(233,168,91,.16),transparent 58%),
+             radial-gradient(40% 36% at 6% 96%,rgba(169,193,200,.16),transparent 60%);
+}
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;perspective:900px}
+.case{
+  --rx:0deg;--ry:0deg;
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface);
+  transition:transform .2s var(--ease),box-shadow .2s;
+  transform:perspective(900px) translateY(0) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style:preserve-3d;will-change:transform;
+}
+.case:hover{transform:perspective(900px) translateY(-4px) rotateX(var(--rx)) rotateY(var(--ry));box-shadow:var(--shadow)}
+.reveal.in.case:hover{transform:perspective(900px) translateY(-4px) rotateX(var(--rx)) rotateY(var(--ry));box-shadow:var(--shadow)}
+.case .thumb{height:188px;position:relative;overflow:hidden}
+.case .thumb .grad{position:absolute;inset:0}
+.case:nth-child(1) .grad{background:linear-gradient(135deg,var(--night),var(--dawn))}
+.case:nth-child(2) .grad{background:linear-gradient(135deg,var(--dawn),var(--mist))}
+.case:nth-child(3) .grad{background:linear-gradient(135deg,var(--gold),var(--sun))}
+.case:nth-child(4) .grad{background:linear-gradient(135deg,#22384f,var(--gold))}
+.case .thumb .sunup{position:absolute;right:22px;bottom:-26px;width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--warm),rgba(242,201,155,.2) 60%,transparent 72%)}
+.case .body{padding:24px 26px 28px}
+.case .tag{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dawn);font-weight:600}
+.case h3{font-size:1.32rem;margin:10px 0 8px}
+.case p{color:var(--muted);font-size:.93rem;margin-bottom:16px}
+.case .res{display:flex;gap:22px;border-top:1px solid var(--line-soft);padding-top:14px}
+.case .res .r .n{font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;color:var(--ink)}
+.case .res .r .k{font-size:.78rem;color:var(--muted)}
+
+/* ---------- Studio ---------- */
+.studio{background:var(--night);color:var(--warm);position:relative;overflow:hidden}
+.studio::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 85% 10%,rgba(233,168,91,.22),transparent 60%)}
+.studio .wrap{position:relative;z-index:1}
+.studio h2{color:var(--day);font-size:clamp(2rem,4vw,3rem)}
+.studio .eyebrow{color:var(--sun)}
+.studio .eyebrow::before{background:var(--gold)}
+.studio .lead{color:var(--mist);max-width:60ch}
+.studio-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center}
+.studio-facts{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.fact{border:1px solid rgba(249,231,197,.16);border-radius:14px;padding:22px}
+.fact .n{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;color:var(--sun)}
+.fact .k{font-size:.86rem;color:var(--mist);margin-top:4px}
+.studio p.body{color:var(--mist);margin-top:22px;font-size:1.02rem}
+
+/* ---------- Contact ---------- */
+.contact{position:relative;overflow:hidden}
+.contact::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(70% 60% at 10% 112%,rgba(62,96,120,.12),transparent 60%),
+             radial-gradient(52% 46% at 96% 100%,rgba(242,201,155,.16),transparent 62%);
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:start}
+.contact h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:14px}
+.contact .ways{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.contact .ways a,.contact .ways .way{display:flex;align-items:center;gap:12px;color:var(--ink-soft);font-weight:500;text-decoration:none}
+.contact .ways a:hover{color:var(--ink)}
+.contact .ways .ic{width:38px;height:38px;border-radius:10px;background:rgba(62,96,120,.1);display:grid;place-items:center;color:var(--dawn);flex:0 0 auto}
+form{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.82rem;font-weight:600;color:var(--ink-soft);margin-bottom:7px;letter-spacing:.02em}
+.field input,.field textarea{
+  width:100%;font-family:inherit;font-size:.96rem;color:var(--ink);
+  padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:var(--bg);
+  transition:border-color .25s,box-shadow .25s;
+}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--dawn);box-shadow:0 0 0 3px rgba(62,96,120,.13)}
+.field textarea{resize:vertical;min-height:108px}
+.form-note{font-size:.82rem;color:var(--muted);margin-top:4px}
+.form-ok{display:none;margin-top:14px;padding:12px 14px;border-radius:11px;background:rgba(62,96,120,.1);color:var(--dawn);font-size:.9rem;font-weight:500}
+
+/* ---------- Footer ---------- */
+footer{
+  position:relative;
+  border-top:1px solid rgba(249,231,197,.14);
+  background:var(--night-deep);color:var(--mist);
+  padding:50px 0 40px;overflow:hidden;
+}
+footer::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(233,168,91,.5),transparent);
+}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;position:relative;z-index:1}
+.foot .brand{font-size:1.05rem;color:var(--day)}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap}
+.foot-links a{font-size:.9rem;color:var(--mist)}
+.foot-links a:hover{color:var(--day)}
+.foot .cr{font-size:.84rem;color:rgba(169,193,200,.78);width:100%;border-top:1px solid rgba(249,231,197,.12);padding-top:20px;margin-top:8px}
+
+/* ---------- Section divider ---------- */
+.divider{position:relative;height:1px;max-width:var(--maxw);margin:0 auto;border:0;background:transparent}
+.divider::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--line) 16%,var(--line) 84%,transparent)}
+.divider::after{content:"";position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px #FAF7F0,0 0 26px 6px rgba(233,168,91,.55),0 0 60px 18px rgba(233,168,91,.22)}
+
+/* ---------- Reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+/* cards keep their tilt transform even after reveal */
+.reveal.in.case,.reveal.in.svc{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+
+/* ---------- Responsive ---------- */
+@media(max-width:860px){
+  section{padding:84px 0}
+  .nav-links{
+    position:fixed;inset:0 0 0 auto;width:min(78vw,320px);background:var(--day);
+    flex-direction:column;align-items:flex-start;justify-content:center;gap:26px;
+    padding:40px;transform:translateX(100%);transition:transform .4s var(--ease);box-shadow:var(--shadow);
+  }
+  .nav-links.open{transform:none}
+  .menu-btn{display:block}
+  .svc-grid,.work-grid,.studio-grid,.contact-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{border-right:none;border-bottom:1px solid var(--line-soft)}
+  .step:last-child{border-bottom:none}
+  .studio-facts{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .steps{grid-template-columns:1fr}
+  .hero-meta{gap:26px 36px}
+}
+/* ---------- Industry Demos ---------- */
+.demos{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(242,201,155,.07),rgba(242,201,155,0) 24%)}
+.demos h2 em{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:600;color:var(--gold)}
+.demo-tabs{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-bottom:42px}
+.demo-tab-btn{background:var(--surface);border:1px solid var(--line);color:var(--ink-soft);padding:.6rem 1.25rem;border-radius:999px;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s var(--ease)}
+.demo-tab-btn:hover{transform:translateY(-2px);border-color:var(--ink-soft)}
+.demo-tab-btn.active{background:var(--gold);color:#3a2a12;border-color:var(--gold);box-shadow:0 12px 26px -14px rgba(233,168,91,.65)}
+.demo-card{background:#f4f1ea;border:1px solid var(--line);border-radius:var(--radius);padding:38px 34px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+.demo-info h3{font-size:1.7rem;font-weight:600;margin-bottom:14px;color:var(--ink)}
+.demo-info p{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:20px}
+.demo-features{display:flex;flex-direction:column;gap:.7rem;margin-bottom:24px}
+.demo-feat{display:flex;align-items:flex-start;gap:.7rem;font-size:.93rem;color:var(--ink-soft)}
+.demo-feat-check{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(233,168,91,.16);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;margin-top:1px}
+.demo-visual{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:30px;text-align:center;position:relative}
+.demo-badge{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--dawn);font-weight:600;display:block;margin-bottom:14px}
+.demo-mock{font-size:3.6rem;margin-bottom:12px;line-height:1}
+.demo-visual p{color:var(--muted);font-size:.9rem;line-height:1.6}
+@media(max-width:760px){.demo-card{grid-template-columns:1fr;gap:24px}}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  /* keep the signature sunrise motion even when reduce-motion is on */
+  .hero-sun{animation:sunRise 1.4s linear both!important}
+  .hero-sun::before{animation:sunTrail 1.4s linear both!important}
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <path d="M3 22h24" stroke="#3E6078" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M15 21V8" stroke="#17263A" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M15 8c4 0 7 3 7 7-3 0-7-3-7-7Z" fill="#E9A85B"/>
+          <path d="M15 8c-4 0-7 3-7 7 3 0 7-3 7-7Z" fill="#F2C99B"/>
+        </svg>
+      </span>
+      Daybreak
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#work">Work</a>
+      <a href="#studio">Studio</a>
+      <a href="#contact" class="btn btn-accent">Start a project</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-sun" aria-hidden="true">
+   <div class="hero-sun-inner">
+    <svg viewBox="0 0 200 200" width="100%" height="100%" fill="none">
+      <defs>
+        <radialGradient id="disc" cx="50%" cy="46%" r="55%">
+          <stop offset="0%" stop-color="#F6E4C5"/>
+          <stop offset="55%" stop-color="#F2C99B"/>
+          <stop offset="100%" stop-color="#E9A85B"/>
+        </radialGradient>
+        <radialGradient id="corona" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(242,201,155,.55)"/>
+          <stop offset="60%" stop-color="rgba(233,168,91,.18)"/>
+          <stop offset="100%" stop-color="rgba(233,168,91,0)"/>
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="96" fill="url(#corona)"/>
+      <circle cx="100" cy="100" r="74" fill="none" stroke="rgba(233,168,91,.28)" stroke-width="1.2"/>
+      <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(242,201,155,.40)" stroke-width="1"/>
+      <circle cx="100" cy="100" r="50" fill="url(#disc)"/>
+    </svg>
+   </div>
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow reveal">Web studio · design &amp; code</span>
+    <h1 class="reveal">Making your ideas<br>come to <span class="light">light</span>.</h1>
+    <p class="lead reveal">Every product begins before dawn — a rough thought, a first sketch, the quiet hour when things are still possible. Daybreak Studio takes that early idea and builds it into an interface that ships. Design and engineering, under one roof, from the first light onward.</p>
+    <div class="hero-cta reveal">
+      <a href="#contact" class="btn btn-accent">Start a project →</a>
+      <a href="#work" class="btn btn-ghost">See our work</a>
+    </div>
+    <div class="hero-meta reveal">
+      <div class="stat"><div class="n">Design + Code</div><div class="l">One team, no handoff gap</div></div>
+      <div class="stat"><div class="n">Since first light</div><div class="l">Built for the early stage</div></div>
+      <div class="stat"><div class="n">End to end</div><div class="l">From brief to launch day</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span>The brief</span><span class="dot"></span></div>
+</section>
+
+<hr class="divider" aria-hidden="true">
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What we do at first light</span>
+      <h2>Two disciplines, one studio.</h2>
+      <p class="lead">We don't toss designs over a wall to someone else to build. The people who sketch your product are the people who ship it — so the morning idea survives intact to launch.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l2.2 5.4L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.8-.6L12 3Z"/></svg>
+        </div>
+        <h3>Design</h3>
+        <p>Brand, interface and the system that holds them together — crafted so the product feels inevitable, not decorated.</p>
+        <ul>
+          <li>Brand &amp; visual identity</li>
+          <li>Product &amp; UI/UX design</li>
+          <li>Design systems &amp; tokens</li>
+          <li>Prototyping &amp; motion</li>
+        </ul>
+      </div>
+      <div class="svc reveal">
+        <div class="ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M13 5l-2 14"/></svg>
+        </div>
+        <h3>Code</h3>
+        <p>We build what we draw. Fast, accessible, maintainable front-ends and the APIs behind them — no slides that never become software.</p>
+        <ul>
+          <li>Front-end &amp; design engineering</li>
+          <li>Web apps &amp; marketing sites</li>
+          <li>Headless CMS &amp; integrations</li>
+          <li>Performance &amp; accessibility</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" aria-hidden="true">
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How the day unfolds</span>
+      <h2>A calm, four-step process.</h2>
+      <p class="lead">No theatre, no mystery. The same rhythm we use on every project — from the first conversation to the moment it goes live.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">01 · Night</div><h3>Discover</h3><p>We learn the business, the users and the real constraint. The rough idea gets honest shape.</p></div>
+      <div class="step reveal"><div class="num">02 · Dawn</div><h3>Design</h3><p>Concepts, then a system. You see the product long before a line of code is written.</p></div>
+      <div class="step reveal"><div class="num">03 · First light</div><h3>Build</h3><p>We engineer it — accessible, performant, documented. No black boxes, no surprises.</p></div>
+      <div class="step reveal"><div class="num">04 · Daylight</div><h3>Ship</h3><p>We release, measure and stay. The work keeps earning after the sun is up.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" aria-hidden="true">
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Selected work</span>
+      <h2>Things we brought to light.</h2>
+      <p class="lead">A few recent builds — early-stage products and established brands that needed a clearer morning.</p>
+    </div>
+    <div class="work-grid">
+      <article class="case reveal">
+        <div class="thumb"><div class="grad"></div><div class="sunup"></div></div>
+        <div class="body">
+          <span class="tag">Fintech · SaaS</span>
+          <h3>Northwind Dashboard</h3>
+          <p>Design system and front-end for a analytics platform serving 40k operators.</p>
+          <div class="res"><div class="r"><div class="n">+38%</div><div class="k">task speed</div></div><div class="r"><div class="n">12 wks</div><div class="k">to launch</div></div></div>
+        </div>
+      </article>
+      <article class="case reveal">
+        <div class="thumb"><div class="grad"></div><div class="sunup"></div></div>
+        <div class="body">
+          <span class="tag">Studio · Brand</span>
+          <h3>Aperture Identity</h3>
+          <p>Visual identity and site for a photography collective — calm, editorial, fast.</p>
+          <div class="res"><div class="r"><div class="n">0.9s</div><div class="k">load time</div></div><div class="r"><div class="n">100</div><div class="k">a11y score</div></div></div>
+        </div>
+      </article>
+      <article class="case reveal">
+        <div class="thumb"><div class="grad"></div><div class="sunup"></div></div>
+        <div class="body">
+          <span class="tag">Marketplace</span>
+          <h3>Harvest Commerce</h3>
+          <p>Headless storefront and CMS for a regional food brand expanding online.</p>
+          <div class="res"><div class="r"><div class="n">2.4×</div><div class="k">conversion</div></div><div class="r"><div class="n">3 mo</div><div class="k">end to end</div></div></div>
+        </div>
+      </article>
+      <article class="case reveal">
+        <div class="thumb"><div class="grad"></div><div class="sunup"></div></div>
+        <div class="body">
+          <span class="tag">Web app</span>
+          <h3>Lumen Planning</h3>
+          <p>Product design and build for a scheduling tool used by distributed teams.</p>
+          <div class="res"><div class="r"><div class="n">−52%</div><div class="k">support tickets</div></div><div class="r"><div class="n">1 team</div><div class="k">design+code</div></div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" aria-hidden="true">
+
+<!-- INDUSTRY DEMOS -->
+<section class="demos reveal" id="demos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Interactive Industry Demos</span>
+      <h2>Custom concepts for <em>your niche.</em></h2>
+      <p class="lead">Select your industry below to see how we tailor every design for maximum local conversion.</p>
+    </div>
+
+    <div class="demo-tabs">
+      <button class="demo-tab-btn active" data-niche="detailing">🚗 Auto Detailing</button>
+      <button class="demo-tab-btn" data-niche="barber">💈 Barber &amp; Salon</button>
+      <button class="demo-tab-btn" data-niche="dental">🦷 Dental &amp; Medical</button>
+      <button class="demo-tab-btn" data-niche="hvac">🛠️ HVAC &amp; Plumbing</button>
+      <button class="demo-tab-btn" data-niche="restaurant">🍷 Restaurant &amp; Bar</button>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-info">
+        <h3 id="demoTitle">Auto Detailing &amp; Ceramic Coating Studio</h3>
+        <p id="demoDesc">Designed for premium local detailing shops. Features instant service packages, online booking request, before &amp; after transformation gallery, and customer review highlights.</p>
+        <div class="demo-features" id="demoFeats">
+          <div class="demo-feat"><span class="demo-feat-check">✓</span><span>Interactive Service Calculator (Ceramic, Paint Correction, Full Detail)</span></div>
+          <div class="demo-feat"><span class="demo-feat-check">✓</span><span>One-Tap Call &amp; Text Buttons for Instant Quote Requests</span></div>
+          <div class="demo-feat"><span class="demo-feat-check">✓</span><span>Google Reviews Auto-Sync &amp; Star Rating Display</span></div>
+          <div class="demo-feat"><span class="demo-feat-check">✓</span><span>Mobile-First Booking Form with Vehicle Type Selection</span></div>
+        </div>
+        <a href="#contact" class="btn btn-accent">Request Free Concept for My Business</a>
+      </div>
+      <div class="demo-visual">
+        <span class="demo-badge" id="demoBadge">High-Ticket Service Focus</span>
+        <div class="demo-mock" id="demoMock">🚗</div>
+        <p>Customized layout with fast load speeds, modern aesthetics, and optimized call-to-actions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" aria-hidden="true">
+
+<!-- STUDIO -->
+<section class="studio" id="studio">
+  <div class="wrap studio-grid">
+    <div class="reveal">
+      <span class="eyebrow">The studio</span>
+      <h2>We do our best work in the early hours.</h2>
+      <p class="body">Daybreak Studio is a small web studio for founders and teams who are still shaping the thing. We like the part of the day when an idea is barely formed — because that's where the right design and the right code change everything. No bloated retainers, no junior handoffs: you work with the people doing the work.</p>
+      <p class="body">We're based remotely and work with clients across time zones, from the first message to long after launch.</p>
+    </div>
+    <div class="studio-facts reveal">
+      <div class="fact"><div class="n">40+</div><div class="k">products shipped</div></div>
+      <div class="fact"><div class="n">9 yrs</div><div class="k">design &amp; code</div></div>
+      <div class="fact"><div class="n">1</div><div class="k">team, no handoffs</div></div>
+      <div class="fact"><div class="n">∞</div><div class="k">early-stage ideas</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" aria-hidden="true">
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Let's begin</span>
+      <h2>Got an idea waiting for daylight?</h2>
+      <p class="lead">Tell us what you're building. We'll reply with a frank read on fit and next steps — usually within a day.</p>
+      <div class="ways">
+        <a href="mailto:hello@daybreak.studio"><span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>hello@daybreak.studio</a>
+        <span class="way"><span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Mon–Fri, from first light</span>
+      </div>
+    </div>
+    <form class="reveal" id="contactForm" novalidate>
+      <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required></div>
+      <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@company.com" required></div>
+      <div class="field"><label for="msg">Project</label><textarea id="msg" name="msg" placeholder="What are you building?" required></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send the brief →</button>
+      <p class="form-note">No spam, no CRM chase. Just a human reply.</p>
+      <div class="form-ok" id="formOk">Thanks — your brief is in. We'll be in touch at first light. ☀</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#top" class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
+          <path d="M3 22h24" stroke="#3E6078" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M15 8c4 0 7 3 7 7-3 0-7-3-7-7Z" fill="#E9A85B"/>
+          <path d="M15 8c-4 0-7 3-7 7 3 0 7-3 7-7Z" fill="#F2C99B"/>
+        </svg>
+      </span>
+      Daybreak Studio
+    </a>
+    <div class="foot-links">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#work">Work</a>
+      <a href="#studio">Studio</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="cr">© <span id="yr"></span> Daybreak Studio — Making your ideas come to light.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* header solid on scroll */
+  var header=document.querySelector('header');
+  var onScroll=function(){header.classList.toggle('scrolled',window.scrollY>20)};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* mobile menu */
+  var menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('navLinks');
+  menuBtn.addEventListener('click',function(){nav.classList.toggle('open')});
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open')})});
+
+  /* reveal on scroll */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+  /* form */
+  var form=document.getElementById('contactForm'),ok=document.getElementById('formOk');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=form.name.value.trim(),email=form.email.value.trim(),msg=form.msg.value.trim();
+    var valid=name&&msg&&/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+    if(!valid){ok.style.display='none';form.querySelectorAll('input,textarea').forEach(function(f){f.style.borderColor=valid?'':'#E9A85B'});return;}
+    ok.style.display='block';form.reset();
+  });
+
+  /* industry demos tabs */
+  var NICHES={
+    detailing:{title:"Auto Detailing & Ceramic Coating Studio",desc:"Designed for premium local detailing shops. Features instant service packages, online booking request, before & after transformation gallery, and customer review highlights.",icon:"🚗",badge:"High-Ticket Service Focus",features:["Interactive Service Calculator (Ceramic, Paint Correction, Full Detail)","One-Tap Call & Text Buttons for Instant Quote Requests","Google Reviews Auto-Sync & Star Rating Display","Mobile-First Booking Form with Vehicle Type Selection"]},
+    barber:{title:"Vintage & Modern Barber Club",desc:"Crafted for barbershops looking to showcase their atmosphere, haircuts, and barber team while allowing clients to easily schedule an appointment via WhatsApp or online booking.",icon:"💈",badge:"Atmosphere & Booking Focus",features:["Services Menu with Prices & Duration Estimates","Barber Team Profiles & Chair Availability","Direct WhatsApp / Call Booking Integration","Photo Gallery for Cut Styles & Shop Ambience"]},
+    dental:{title:"Family Dental & Cosmetic Dentistry Clinic",desc:"Trust-building, clean design for dental practices and medical clinics. Emphasizes patient comfort, financing options, emergency care contacts, and online appointment booking.",icon:"🦷",badge:"Trust & Lead Gen Focus",features:["New Patient Special Offer Hero Banner","Insurance & Payment Plan Transparency","Patient Testimonials & Smile Transformations","HIPAA-Compliant Contact & Consultation Request"]},
+    hvac:{title:"HVAC, Plumbing & Home Services",desc:"Built for local contractors who need emergency calls 24/7. High contrast, mobile-optimized phone buttons, clear service areas, and fast quote requests.",icon:"🛠️",badge:"Emergency Call & Quote Focus",features:["24/7 Emergency Service Floating Call Bar","Zip-Code Service Area Verification","Upfront Estimate Request Form","Licensed & Insured Proof Badges"]},
+    restaurant:{title:"Boutique Restaurant & Craft Bar",desc:"Visually stunning website for local eateries, coffee shops, and bars. Includes digital interactive menu, online table reservation, and OpenTable/DoorDash links.",icon:"🍷",badge:"Menu & Reservation Focus",features:["Mobile Digital Menu with Category Filters","Table Reservation Request","Hours & Location Map Integration","Special Events & Weekly Specials Section"]}
+  };
+  var demoBtns=document.querySelectorAll('.demo-tab-btn');
+  var dTitle=document.getElementById('demoTitle'),dDesc=document.getElementById('demoDesc'),
+      dBadge=document.getElementById('demoBadge'),dMock=document.getElementById('demoMock'),dFeats=document.getElementById('demoFeats');
+  demoBtns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var n=b.dataset.niche,o=NICHES[n];
+      if(!o)return;
+      demoBtns.forEach(function(c){c.classList.remove('active')});
+      b.classList.add('active');
+      if(dTitle)dTitle.textContent=o.title;
+      if(dDesc)dDesc.textContent=o.desc;
+      if(dBadge)dBadge.textContent=o.badge;
+      if(dMock)dMock.textContent=o.icon;
+      if(dFeats)dFeats.innerHTML=o.features.map(function(f){return '<div class="demo-feat"><span class="demo-feat-check">✓</span><span>'+f+'</span></div>'}).join('');
+    });
+  });
+
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  /* subtle pointer tilt on work + service cards */
+  var tiltEls=document.querySelectorAll('.case,.svc');
+  tiltEls.forEach(function(el){
+    var MAX=5; /* degrees */
+    var apply=function(e){
+      var r=el.getBoundingClientRect();
+      var px=(e.clientX-r.left)/r.width-0.5;
+      var py=(e.clientY-r.top)/r.height-0.5;
+      el.style.setProperty('--ry',(px*MAX).toFixed(2)+'deg');
+      el.style.setProperty('--rx',(-py*MAX).toFixed(2)+'deg');
+    };
+    el.addEventListener('mouseenter',function(){ el.style.transition='transform .2s var(--ease),box-shadow .2s'; });
+    el.addEventListener('mousemove',function(e){
+      /* follow cursor with a smooth 0.2s transition */
+      el.style.transition='transform .2s var(--ease),box-shadow .2s';
+      apply(e);
+    });
+    el.addEventListener('mouseleave',function(){
+      el.style.transition='transform .2s var(--ease),box-shadow .2s';
+      el.style.setProperty('--rx','0deg');
+      el.style.setProperty('--ry','0deg');
+    });
+  });
+
+  /* hero sun parallax (rises slowly on scroll) — acts on inner, so it never clashes with the entry arc */
+  var sunInner=document.querySelector('.hero-sun-inner');
+  if(sunInner){
+    var ticking=false;
+    var moveSun=function(){
+      var y=window.scrollY||0; if(y<0)y=0;
+      var eff=y>520?520:y;
+      var rise=eff*0.30;                       /* sobe até ~156px */
+      var scale=1+eff*0.00030;                 /* cresce leve */
+      sunInner.style.transform='translateY(-'+rise.toFixed(1)+'px) scale('+scale.toFixed(3)+')';
+      ticking=false;
+    };
+    window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(moveSun);ticking=true}},{passive:true});
+    window.addEventListener('resize',moveSun,{passive:true});
+    moveSun();
+  }
+})();
+</script>
+</body>
+</html>
